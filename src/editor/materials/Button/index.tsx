@@ -4,10 +4,11 @@ import { ButtonType } from "antd/es/button";
 export interface ButtonProps {
   type: ButtonType;
   text: string;
+  id:number
 }
 
-const Button = ({ type, text }: ButtonProps) => {
-  return <AntdButton type={type}>{text}</AntdButton>;
+const Button = ({ id , type, text }: ButtonProps) => {
+  return <AntdButton data-component-id={id}  type={type}>{text}</AntdButton>;
 };
 
 export default Button;

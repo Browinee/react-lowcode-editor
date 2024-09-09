@@ -10,6 +10,7 @@ function Page({ children, id, name }: CommonComponentProps) {
   const { canDrop, drop } = useMaterialDrop(["Button", "Container"], id);
   return (
     <div
+    data-component-id={id}
       ref={drop}
       className={`p-[20px] h-[100%] box-border ${
         canDrop ? "border-2 border-blue-500" : ""
