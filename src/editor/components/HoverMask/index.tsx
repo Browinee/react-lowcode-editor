@@ -22,10 +22,13 @@ function HoverMask({
     labelLeft: 0,
   });
 
+  const { components } = useComponentsStore();
   useEffect(() => {
     updatePosition();
   }, [componentId]);
-
+  useEffect(() => {
+    updatePosition();
+  }, [components]);
   function updatePosition() {
     if (!componentId) return;
 
@@ -54,7 +57,6 @@ function HoverMask({
       labelLeft,
     });
   }
-  const { components } = useComponentsStore();
 
   const curComponent = useMemo(() => {
     return getComponentById(componentId, components);

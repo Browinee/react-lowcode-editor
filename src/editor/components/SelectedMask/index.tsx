@@ -5,7 +5,7 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { getComponentById, useComponentsStore } from '../../stores/components';
-import { Popconfirm, Space } from 'antd';
+import { Dropdown, Popconfirm, Space } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
 interface SelectedMaskProps {
@@ -25,12 +25,14 @@ function SelectedMask({ containerClassName, portalWrapperClassName, componentId 
     labelLeft: 0,
   });
 
-  const { components, curComponentId } = useComponentsStore();
+  const { components, curComponentId, curComponent, deleteComponent, setCurComponentId } = useComponentsStore();
 
   useEffect(() => {
     updatePosition();
   }, [componentId]);
-
+  useEffect(() => {
+    updatePosition();
+  }, [components]);
   function updatePosition() {
     if (!componentId) return;
 
@@ -64,13 +66,31 @@ function SelectedMask({ containerClassName, portalWrapperClassName, componentId 
       return document.querySelector(`.${portalWrapperClassName}`)!
   }, []);
 
-  const curComponent = useMemo(() => {
+
+  const curSelectedComponent = useMemo(() => {
     return getComponentById(componentId, components);
   }, [componentId]);
 
   function handleDelete() {
-
+    deleteComponent(curComponentId!);
+    setCurComponentId(null);
   }
+
+
+  const parentComponents = useMemo(() => {
+    const parentComponents = [];
+    let component = curComponent;
+
+    while (component?.parentId) {
+      component = getComponentById(component.parentId, components)!;
+      parentComponents.push(component);
+    }
+
+    return parentComponents;
+
+  }, [curComponent]);
+
+
 
   return createPortal((
     <>
@@ -101,18 +121,31 @@ function SelectedMask({ containerClassName, portalWrapperClassName, componentId 
           }}
         >
           <Space>
-            <div
-              style={{
-                padding: '0 8px',
-                backgroundColor: 'blue',
-                borderRadius: 4,
-                color: '#fff',
-                cursor: "pointer",
-                whiteSpace: 'nowrap',
+          <Dropdown
+              menu={{
+                items: parentComponents.map(item => ({
+                  key: item.id,
+                  label: item.name,
+                })),
+                onClick: ({ key }) => {
+                  setCurComponentId(+key);
+                }
               }}
+              disabled={parentComponents.length === 0}
             >
-              {curComponent?.name}
-            </div>
+              <div
+                style={{
+                  padding: '0 8px',
+                  backgroundColor: 'blue',
+                  borderRadius: 4,
+                  color: '#fff',
+                  cursor: "pointer",
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {curSelectedComponent?.name}
+              </div>
+            </Dropdown>
             {curComponentId !== 1 && (
               <div style={{ padding: '0 8px', backgroundColor: 'blue' }}>
                 <Popconfirm
