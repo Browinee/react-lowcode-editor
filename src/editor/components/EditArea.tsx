@@ -3,9 +3,12 @@ import { useComponentConfigStore } from "../stores/component-config";
 import { Component, useComponentsStore } from "../stores/components";
 import { useHover } from "../hooks";
 import HoverMask from "./HoverMask";
+import { useClick } from "../hooks/useClick";
+import SelectedMask from "./SelectedMask";
 
 export function EditArea() {
-  const { components, addComponent } = useComponentsStore();
+  const { components, addComponent, curComponentId, setCurComponentId } =
+    useComponentsStore();
   const { componentConfig } = useComponentConfigStore();
 
   function renderComponents(components: Component[]): React.ReactNode {
@@ -29,16 +32,31 @@ export function EditArea() {
     });
   }
   const { hoverComponentId, handleMouseOver, handleMouseLeave } = useHover();
+  const { handleClick } = useClick();
   return (
-    <div className="h-[100%] edit-area" onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
+    <div
+      className="h-[100%] edit-area"
+      onClick={handleClick}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* <pre>{JSON.stringify(components, null, 2)}</pre> */}
       {renderComponents(components)}
-      {hoverComponentId && (
+      {hoverComponentId && hoverComponentId !== curComponentId && (
         <HoverMask
+          portalWrapperClassName="portal-wrapper"
           containerClassName="edit-area"
           componentId={hoverComponentId}
         />
       )}
+      {curComponentId && (
+        <SelectedMask
+          portalWrapperClassName="portal-wrapper"
+          containerClassName="edit-area"
+          componentId={curComponentId}
+        />
+      )}
+      <div className="portal-wrapper"></div>
     </div>
   );
 }

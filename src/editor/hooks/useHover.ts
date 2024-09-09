@@ -4,8 +4,6 @@ export function useHover() {
   const [hoverComponentId, setHoverComponentId] = useState<number>();
 
   const handleMouseOver: MouseEventHandler = (e) => {
-    console.log("e.native", e.nativeEvent.composedPath());
-
     const path = e.nativeEvent.composedPath();
 
     for (let i = 0; i < path.length; i += 1) {
