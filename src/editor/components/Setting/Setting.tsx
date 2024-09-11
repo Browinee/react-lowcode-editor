@@ -20,7 +20,7 @@ export function Setting() {
         block
         options={["Attribute", "Style", "Event"]}
       />
-      <div>
+      <div className="pt-[20px]">
         {key === "Attribute" && <Attribute />}
         {key === "Style" && <Style />}
         {key === "Event" && <Event />}

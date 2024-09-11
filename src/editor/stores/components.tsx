@@ -6,7 +6,7 @@ export interface Component {
   props: any;
   children?: Component[];
   parentId?: number;
-  desc: string
+  desc: string;
 }
 
 interface State {
@@ -78,6 +78,7 @@ export const useComponentsStore = create<State & Action>((set, get) => ({
   updateComponentProps: (componentId, props) =>
     set((state) => {
       const component = getComponentById(componentId, state.components);
+
       if (component) {
         component.props = { ...component.props, ...props };
 
