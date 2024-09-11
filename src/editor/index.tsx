@@ -2,7 +2,7 @@ import { Allotment } from "allotment";
 import "allotment/dist/style.css";
 import { Header } from "./components/Header";
 import { EditArea } from "./components/EditArea";
-import { Setting } from "./components/Setting";
+import { Setting } from "./components/Setting/Setting";
 import { Material } from "./components/Material";
 
 export default function ReactPlayground() {

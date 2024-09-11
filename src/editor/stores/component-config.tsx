@@ -3,10 +3,27 @@ import Container from "../materials/Container";
 import Button from "../materials/Button";
 import Page from "../materials/Page";
 
+export interface ComponentSetter {
+  name: string;
+  label: string;
+  type: string;
+  [key: string]: any;
+}
+
+export interface ComponentConfig {
+  name: string;
+  defaultProps: Record<string, any>;
+  desc: string;
+  setter?: ComponentSetter[];
+  component: any;
+}
+
 export interface ComponentConfig {
   name: string;
   defaultProps: Record<string, any>;
   component: any;
+  desc: string;
+  setter?: ComponentSetter[];
 }
 
 interface State {
@@ -23,6 +40,7 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
       name: "Container",
       defaultProps: {},
       component: Container,
+      desc: "Container",
     },
     Button: {
       name: "Button",
@@ -30,12 +48,30 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
         type: "primary",
         text: "Button",
       },
+      desc: "Button",
       component: Button,
+      setter: [
+        {
+          name: "type",
+          label: "Button Type",
+          type: "select",
+          options: [
+            { label: "primary", value: "primary" },
+            { label: "secondary", value: "default" },
+          ],
+        },
+        {
+          name: "text",
+          label: "text",
+          type: "input",
+        },
+      ],
     },
     Page: {
       name: "Page",
       defaultProps: {},
       component: Page,
+      desc: "Page",
     },
   },
   registerComponent: (name: string, componentConfig: ComponentConfig) =>
