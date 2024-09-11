@@ -1,14 +1,21 @@
 import { Button as AntdButton } from "antd";
 import { ButtonType } from "antd/es/button";
+import { CommonComponentProps } from "../../interface";
 
 export interface ButtonProps {
   type: ButtonType;
   text: string;
-  id:number
+  id: number;
 }
 
-const Button = ({ id , type, text }: ButtonProps) => {
-  return <AntdButton data-component-id={id}  type={type}>{text}</AntdButton>;
+const Button = ({ id, type, text, styles }: CommonComponentProps) => {
+  console.log("styles", styles);
+
+  return (
+    <AntdButton data-component-id={id} style={styles} type={type}>
+      {text}
+    </AntdButton>
+  );
 };
 
 export default Button;

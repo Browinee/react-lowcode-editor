@@ -13,14 +13,17 @@ export function useMaterialDrop(accept: string[], id: number) {
       if (didDrop) {
         return;
       }
-      const config = componentConfig[item.type]
+      const config = componentConfig[item.type];
 
       addComponent(
         {
           id: new Date().getTime(),
           name: item.type,
           props: config.defaultProps,
-          desc: config.desc
+          desc: config.desc,
+          styles: {
+            background: "green",
+          },
         },
         id
       );
