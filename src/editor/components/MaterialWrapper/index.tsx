@@ -15,7 +15,10 @@ export function MaterialWrapper() {
         block
         options={["Material", "Outline", "SourceCode"]}
       />
-      <div className="pt-[20px]">
+      <div
+        className="pt-[20px] h-[calc(100vh-60px-30px-20px)]
+"
+      >
         {key === "Material" && <Material />}
         {key === "Outline" && <Outline />}
         {key === "SourceCode" && <Source />}
