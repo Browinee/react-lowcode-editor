@@ -34,6 +34,7 @@ export function Attribute() {
       updateComponentProps(curComponentId, changeValues);
     }
   };
+
   return (
     <Form
       form={form}

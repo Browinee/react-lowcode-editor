@@ -6,6 +6,7 @@ import { useMaterialDrop } from "../../hooks";
 
 const Container = ({ id, children, styles }: CommonComponentProps) => {
   const { canDrop, drop } = useMaterialDrop(["Button", "Container"], id);
+  console.log("id", id);
 
   return (
     <div

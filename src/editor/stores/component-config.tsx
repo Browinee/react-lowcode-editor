@@ -1,7 +1,10 @@
 import { create } from "zustand";
-import Container from "../materials/Container";
-import Button from "../materials/Button";
-import Page from "../materials/Page";
+import ContainerEditing from "../materials/Container/editing";
+import ContainerPreview from "../materials/Container/preview";
+import ButtonEditing from "../materials/Button/editing";
+import ButtonPreview from "../materials/Button/preview";
+import PageEditing from "../materials/Page/editing";
+import PagePreview from "../materials/Page/preview";
 
 export interface ComponentSetter {
   name: string;
@@ -16,15 +19,8 @@ export interface ComponentConfig {
   desc: string;
   setter?: ComponentSetter[];
   stylesSetter?: ComponentSetter[];
-  component: any;
-}
-
-export interface ComponentConfig {
-  name: string;
-  defaultProps: Record<string, any>;
-  component: any;
-  desc: string;
-  setter?: ComponentSetter[];
+  editing: any;
+  preview: any;
 }
 
 interface State {
@@ -40,8 +36,9 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
     Container: {
       name: "Container",
       defaultProps: {},
-      component: Container,
       desc: "Container",
+      editing: ContainerEditing,
+      preview: ContainerPreview,
     },
     Button: {
       name: "Button",
@@ -50,7 +47,6 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
         text: "Button",
       },
       desc: "Button",
-      component: Button,
       setter: [
         {
           name: "type",
@@ -79,12 +75,15 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
           type: "inputNumber",
         },
       ],
+      editing: ButtonEditing,
+      preview: ButtonPreview,
     },
     Page: {
       name: "Page",
       defaultProps: {},
-      component: Page,
       desc: "Page",
+      editing: PageEditing,
+      preview: PagePreview,
     },
   },
   registerComponent: (name: string, componentConfig: ComponentConfig) =>

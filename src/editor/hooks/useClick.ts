@@ -6,7 +6,6 @@ export function useClick() {
 
   const handleClick: MouseEventHandler = (e) => {
     const path = e.nativeEvent.composedPath();
-
     for (let i = 0; i < path.length; i += 1) {
       const ele = path[i] as HTMLElement;
 
