@@ -12,6 +12,10 @@ export interface ComponentSetter {
   type: string;
   [key: string]: any;
 }
+export interface ComponentEvent {
+  name: string;
+  label: string;
+}
 
 export interface ComponentConfig {
   name: string;
@@ -21,6 +25,7 @@ export interface ComponentConfig {
   stylesSetter?: ComponentSetter[];
   editing: any;
   preview: any;
+  events?: ComponentEvent[];
 }
 
 interface State {
@@ -77,6 +82,16 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
       ],
       editing: ButtonEditing,
       preview: ButtonPreview,
+      events: [
+        {
+          name: "onClick",
+          label: "Click",
+        },
+        {
+          name: "onDoubleClick",
+          label: "Double Click",
+        },
+      ],
     },
     Page: {
       name: "Page",
