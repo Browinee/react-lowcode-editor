@@ -5,7 +5,7 @@ import {
   useComponentConfigStore,
 } from "../../stores/component-config";
 import { useComponentsStore } from "../../stores/components";
-import { ActionModal } from "./ActionModal";
+import { ActionConfig, ActionModal } from "./ActionModal";
 import { GoToLinkConfig } from "./actions/GoToLink";
 import { ShowMessageConfig } from "./actions/ShowMesage";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -73,7 +73,7 @@ export function Event() {
       children: (
         <div>
           {(curComponent.props[event.name]?.actions || []).map(
-            (item: GoToLinkConfig | ShowMessageConfig, index: number) => {
+            (item: ActionConfig, index: number) => {
               return (
                 <div key={item.type + index}>
                   {item.type === "goToLink" ? (
@@ -98,6 +98,25 @@ export function Event() {
                       <div className="text-[blue]">Message</div>
                       <div>{item.config.type}</div>
                       <div>{item.config.text}</div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 10,
+                          right: 10,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => deleteAction(event, index)}
+                      >
+                        <DeleteOutlined />
+                      </div>
+                    </div>
+                  ) : null}
+                  {item.type === "customJS" ? (
+                    <div
+                      key="customJS"
+                      className="border border-[#aaa] m-[10px] p-[10px] relative"
+                    >
+                      <div className="text-[blue]">Customized JS</div>
                       <div
                         style={{
                           position: "absolute",

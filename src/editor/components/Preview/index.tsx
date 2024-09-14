@@ -24,6 +24,15 @@ export function Preview() {
               } else if (action.config.type === "error") {
                 message.error(action.config.text);
               }
+            } else if (action.type === "customJS") {
+              const func = new Function("context", action.code);
+              func({
+                name: component.name,
+                props: component.props,
+                showMessage(content: string) {
+                  message.success(content);
+                },
+              });
             }
           });
         };
