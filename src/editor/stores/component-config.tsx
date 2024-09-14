@@ -5,6 +5,8 @@ import ButtonEditing from "../materials/Button/editing";
 import ButtonPreview from "../materials/Button/preview";
 import PageEditing from "../materials/Page/editing";
 import PagePreview from "../materials/Page/preview";
+import ModalPreview from "../materials/Modal/preview";
+import ModalEditing from "../materials/Modal/editing";
 
 export interface ComponentSetter {
   name: string;
@@ -99,6 +101,33 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
       desc: "Page",
       editing: PageEditing,
       preview: PagePreview,
+    },
+    Modal: {
+      name: "Modal",
+      defaultProps: {
+        title: "Modal",
+      },
+      setter: [
+        {
+          name: "title",
+          label: "title",
+          type: "input",
+        },
+      ],
+      stylesSetter: [],
+      events: [
+        {
+          name: "onOk",
+          label: "Ok",
+        },
+        {
+          name: "onCancel",
+          label: "Cancel",
+        },
+      ],
+      desc: "Modal",
+      preview: ModalPreview,
+      editing: ModalEditing,
     },
   },
   registerComponent: (name: string, componentConfig: ComponentConfig) =>

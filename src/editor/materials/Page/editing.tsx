@@ -7,7 +7,10 @@ import { useComponentsStore } from "../../stores/components";
 import { useMaterialDrop } from "../../hooks";
 
 function Page({ children, id, name, styles }: CommonComponentProps) {
-  const { canDrop, drop } = useMaterialDrop(["Button", "Container"], id);
+  const { canDrop, drop } = useMaterialDrop(
+    ["Button", "Container", "Modal"],
+    id
+  );
   return (
     <div
       data-component-id={id}
