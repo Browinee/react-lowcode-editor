@@ -4,18 +4,28 @@ import { ComponentEvent } from "../../stores/component-config";
 import { GoToLink, GoToLinkConfig } from "./actions/GoToLink";
 import { ShowMessage, ShowMessageConfig } from "./actions/ShowMesage";
 import { CustomJS, CustomJSConfig } from "./actions/CustomJS";
+import {
+  ComponentMethod,
+  ComponentMethodConfig,
+} from "./actions/ComponentMethod";
 
-export type ActionConfig = GoToLinkConfig | ShowMessageConfig | CustomJSConfig;
+export type ActionConfig =
+  | GoToLinkConfig
+  | ShowMessageConfig
+  | CustomJSConfig
+  | ComponentMethodConfig;
 
 export const enum EventType {
   "Link" = "Link",
   "Message" = "Message",
   "CustomJS" = "CustomJs",
+  "ComponentMethod" = "ComponentMethod",
 }
 const map = {
   goToLink: EventType.Link,
   showMessage: EventType.Message,
   customJS: EventType.CustomJS,
+  componentMethod: EventType.ComponentMethod,
 };
 interface ActionModalProps {
   visible: boolean;
@@ -56,7 +66,12 @@ export function ActionModal(props: ActionModalProps) {
           value={key}
           onChange={setKey}
           block
-          options={[EventType.Link, EventType.Message, EventType.CustomJS]}
+          options={[
+            EventType.Link,
+            EventType.Message,
+            EventType.CustomJS,
+            EventType.ComponentMethod,
+          ]}
         />
         {key === EventType.Link && (
           <GoToLink
@@ -71,6 +86,17 @@ export function ActionModal(props: ActionModalProps) {
           <ShowMessage
             key="showMessage"
             value={action?.type === "showMessage" ? action.config : undefined}
+            onChange={(config) => {
+              setCurConfig(config);
+            }}
+          />
+        )}
+        {key === EventType.ComponentMethod && (
+          <ComponentMethod
+            key="showMessage"
+            value={
+              action?.type === "componentMethod" ? action.config : undefined
+            }
             onChange={(config) => {
               setCurConfig(config);
             }}

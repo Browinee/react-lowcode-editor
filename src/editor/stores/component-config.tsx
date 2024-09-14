@@ -18,6 +18,10 @@ export interface ComponentEvent {
   name: string;
   label: string;
 }
+export interface ComponentMethod {
+  name: string;
+  label: string;
+}
 
 export interface ComponentConfig {
   name: string;
@@ -28,6 +32,7 @@ export interface ComponentConfig {
   editing: any;
   preview: any;
   events?: ComponentEvent[];
+  methods?: ComponentMethod[];
 }
 
 interface State {
@@ -123,6 +128,16 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
         {
           name: "onCancel",
           label: "Cancel",
+        },
+      ],
+      methods: [
+        {
+          name: "open",
+          label: "Open modal",
+        },
+        {
+          name: "close",
+          label: "Close modal",
         },
       ],
       desc: "Modal",
