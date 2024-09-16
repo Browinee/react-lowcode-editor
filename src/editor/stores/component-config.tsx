@@ -11,6 +11,10 @@ import TablePreview from "../materials/Table/preview";
 import TableEditing from "../materials/Table/editing";
 import TableColumnPreview from "../materials/TableColumn/preview";
 import TableColumnEditing from "../materials/TableColumn/editing";
+import FormEditing from "../materials/Form/editing";
+import FormPreview from "../materials/Form/preview";
+import FormItemEditing from "../materials/FormItem/editing";
+import FormItemPreview from "../materials/FormItem/preview";
 
 export interface ComponentSetter {
   name: string;
@@ -198,6 +202,80 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
       ],
       editing: TableColumnEditing,
       preview: TableColumnPreview,
+    },
+    Form: {
+      name: "Form",
+      defaultProps: {},
+      desc: "Form",
+      setter: [
+        {
+          name: "title",
+          label: "input",
+          type: "input",
+        },
+      ],
+      events: [
+        {
+          name: "onFinish",
+          label: "Finish",
+        },
+      ],
+      methods: [
+        {
+          name: "submit",
+          label: "submit",
+        },
+      ],
+      editing: FormEditing,
+      preview: FormPreview,
+    },
+    FormItem: {
+      name: "FormItem",
+      desc: "FormItem",
+      defaultProps: {
+        name: new Date().getTime(),
+        label: "Name",
+      },
+      editing: FormItemEditing,
+      preview: FormItemPreview,
+      setter: [
+        {
+          name: "type",
+          label: "type",
+          type: "select",
+          options: [
+            {
+              label: "text",
+              value: "input",
+            },
+            {
+              label: "date",
+              value: "date",
+            },
+          ],
+        },
+        {
+          name: "label",
+          label: "label",
+          type: "input",
+        },
+        {
+          name: "name",
+          label: "name",
+          type: "input",
+        },
+        {
+          name: "rules",
+          label: "rules",
+          type: "select",
+          options: [
+            {
+              label: "required",
+              value: "required",
+            },
+          ],
+        },
+      ],
     },
   },
   registerComponent: (name: string, componentConfig: ComponentConfig) =>
