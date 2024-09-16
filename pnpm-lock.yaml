@@ -20,9 +20,15 @@ dependencies:
   autoprefixer:
     specifier: ^10.4.20
     version: 10.4.20(postcss@8.4.41)
+  axois:
+    specifier: 0.0.1-security
+    version: 0.0.1-security
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
+  dayjs:
+    specifier: ^1.11.13
+    version: 1.11.13
   immer:
     specifier: ^10.1.1
     version: 10.1.1
@@ -839,6 +845,10 @@ packages:
       picocolors: 1.0.1
       postcss: 8.4.41
       postcss-value-parser: 4.2.0
+    dev: false
+
+  /axois@0.0.1-security:
+    resolution: {integrity: sha512-8Nui4fwwyxHfjAfpDlg3Jt66EJA4i1D1eJch3D+wM/Oe+qhpyp7yfiszko/O5/adYu20wc37RG9/Eg8QIJHcvA==}
     dev: false
 
   /balanced-match@1.0.2:

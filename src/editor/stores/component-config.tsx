@@ -7,6 +7,10 @@ import PageEditing from "../materials/Page/editing";
 import PagePreview from "../materials/Page/preview";
 import ModalPreview from "../materials/Modal/preview";
 import ModalEditing from "../materials/Modal/editing";
+import TablePreview from "../materials/Table/preview";
+import TableEditing from "../materials/Table/editing";
+import TableColumnPreview from "../materials/TableColumn/preview";
+import TableColumnEditing from "../materials/TableColumn/editing";
 
 export interface ComponentSetter {
   name: string;
@@ -143,6 +147,57 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
       desc: "Modal",
       preview: ModalPreview,
       editing: ModalEditing,
+    },
+    Table: {
+      name: "Table",
+      defaultProps: {},
+      desc: "Table",
+      setter: [
+        {
+          name: "url",
+          label: "url",
+          type: "input",
+        },
+      ],
+      editing: TableEditing,
+      preview: TablePreview,
+    },
+    TableColumn: {
+      name: "TableColumn",
+      desc: "TableColumn",
+      defaultProps: {
+        dataIndex: `col_${new Date().getTime()}`,
+        title: "Column Name",
+      },
+      setter: [
+        {
+          name: "type",
+          label: "type",
+          type: "select",
+          options: [
+            {
+              label: "text",
+              value: "text",
+            },
+            {
+              label: "date",
+              value: "date",
+            },
+          ],
+        },
+        {
+          name: "title",
+          label: "title",
+          type: "input",
+        },
+        {
+          name: "dataIndex",
+          label: "key",
+          type: "input",
+        },
+      ],
+      editing: TableColumnEditing,
+      preview: TableColumnPreview,
     },
   },
   registerComponent: (name: string, componentConfig: ComponentConfig) =>
