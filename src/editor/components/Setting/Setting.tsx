@@ -5,10 +5,16 @@ import { Event } from "./Event";
 import { Style } from "./Style";
 import { useComponentsStore } from "../../stores/components";
 
+export const enum SettingType {
+  Attribute = "Attribute",
+  Style = "Style",
+  Event = "Event",
+}
+
 export function Setting() {
   const { curComponentId } = useComponentsStore();
 
-  const [key, setKey] = useState<string>("Attribute");
+  const [key, setKey] = useState<string>(SettingType.Attribute);
 
   if (!curComponentId) return null;
 
@@ -18,12 +24,12 @@ export function Setting() {
         value={key}
         onChange={setKey}
         block
-        options={["Attribute", "Style", "Event"]}
+        options={[SettingType.Attribute, SettingType.Style, SettingType.Event]}
       />
       <div className="pt-[20px]">
-        {key === "Attribute" && <Attribute />}
-        {key === "Style" && <Style />}
-        {key === "Event" && <Event />}
+        {key === SettingType.Attribute && <Attribute />}
+        {key === SettingType.Style && <Style />}
+        {key === SettingType.Event && <Event />}
       </div>
     </div>
   );

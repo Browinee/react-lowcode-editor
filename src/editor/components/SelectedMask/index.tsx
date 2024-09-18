@@ -35,13 +35,13 @@ function SelectedMask({
   useEffect(() => {
     updatePosition();
   }, [componentId]);
-  // 等component更新后，用更新後的數據來更新position
+  // 等component更新后並且在畫面上畫完後，用更新後的數據來更新position
   useEffect(() => {
     setTimeout(() => {
       updatePosition();
     }, 200);
   }, [components]);
-  function updatePosition() {
+  const updatePosition = () => {
     if (!componentId) return;
 
     const container = document.querySelector(`.${containerClassName}`);
@@ -63,13 +63,13 @@ function SelectedMask({
 
     setPosition({
       top: top - containerTop + container.scrollTop,
-      left: left - containerLeft + container.scrollTop,
+      left: left - containerLeft + container.scrollLeft,
       width,
       height,
       labelTop,
       labelLeft,
     });
-  }
+  };
 
   const el = useMemo(() => {
     return document.querySelector(`.${portalWrapperClassName}`)!;
@@ -153,7 +153,7 @@ function SelectedMask({
           {curComponentId !== 1 && (
             <div style={{ padding: "0 8px", backgroundColor: "blue" }}>
               <Popconfirm
-                title="确认删除？"
+                title="Delete?"
                 okText={"confirm"}
                 cancelText={"cancel"}
                 onConfirm={handleDelete}

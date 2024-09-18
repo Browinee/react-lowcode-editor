@@ -11,7 +11,7 @@ export function EditArea() {
     useComponentsStore();
   const { componentConfig } = useComponentConfigStore();
 
-  function renderComponents(components: Component[]): React.ReactNode {
+  const renderComponents = (components: Component[]): React.ReactNode => {
     return components.map((component: Component) => {
       const config = componentConfig?.[component.name];
 
@@ -31,7 +31,7 @@ export function EditArea() {
         renderComponents(component.children || [])
       );
     });
-  }
+  };
   const { hoverComponentId, handleMouseOver, handleMouseLeave } = useHover();
   const { handleClick } = useClick();
   return (

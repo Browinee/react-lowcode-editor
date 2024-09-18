@@ -28,6 +28,7 @@ export function Event() {
     }
 
     if (curAction) {
+      // update
       updateComponentProps(curComponent.id, {
         [curEvent.name]: {
           actions: curComponent.props[curEvent.name]?.actions.map(
@@ -38,6 +39,7 @@ export function Event() {
         },
       });
     } else {
+      // add
       updateComponentProps(curComponent.id, {
         [curEvent.name]: {
           actions: [

@@ -17,10 +17,11 @@ export function useHover() {
     }
   };
   const handleMouseLeave = () => {
-    setHoverComponentId(undefined)
-  }
+    setHoverComponentId(undefined);
+  };
   return {
-    handleMouseOver, hoverComponentId,
-    handleMouseLeave
-  }
+    handleMouseOver,
+    hoverComponentId,
+    handleMouseLeave,
+  };
 }

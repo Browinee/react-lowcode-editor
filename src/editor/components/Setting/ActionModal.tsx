@@ -37,7 +37,6 @@ interface ActionModalProps {
 
 export function ActionModal(props: ActionModalProps) {
   const { visible, handleOk, eventConfig, handleCancel, action } = props;
-  console.log("action", action);
 
   const [key, setKey] = useState<string>("Link");
   const [curConfig, setCurConfig] = useState<ActionConfig>();

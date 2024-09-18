@@ -39,14 +39,14 @@ export function ComponentMethod(props: ComponentMethodProps) {
     }
   }, [value]);
 
-  function componentChange(value: number) {
+  const componentChange = (value: number) => {
     if (!curComponentId) return;
 
     setCurId(value);
     setSelectedComponent(getComponentById(value, components));
-  }
+  };
 
-  function componentMethodChange(value: string) {
+  const componentMethodChange = (value: string) => {
     if (!curComponentId || !selectedComponent) return;
 
     setCurMethod(value);
@@ -58,7 +58,7 @@ export function ComponentMethod(props: ComponentMethodProps) {
         method: value,
       },
     });
-  }
+  };
 
   return (
     <div className="mt-[40px]">

@@ -46,7 +46,7 @@ export function Style() {
 
   if (!curComponentId || !curComponent) return null;
 
-  const renderFormElememt = (setting: ComponentSetter) => {
+  const renderFormElement = (setting: ComponentSetter) => {
     const { type, options } = setting;
 
     if (type === "select") {
@@ -101,7 +101,7 @@ export function Style() {
     >
       {componentConfig[curComponent.name]?.stylesSetter?.map((setter) => (
         <Form.Item key={setter.name} name={setter.name} label={setter.label}>
-          {renderFormElememt(setter)}
+          {renderFormElement(setter)}
         </Form.Item>
       ))}
       <div className="h-[200px] border-[1px] border-[#ccc]">
